@@ -1,8 +1,10 @@
-package com.gwabs.martialart;
+package com.gwabs.martialart.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.gwabs.martialart.R;
 
 public class MainActivity extends AppCompatActivity {
 
