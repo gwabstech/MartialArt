@@ -13,7 +13,7 @@ public class MartialArt {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name="fav_martial_art")
-    private String mFavMartialArt;
+    public String mFavMartialArt;
 
     // constructor
     public MartialArt(@NonNull String favMartialArt) {
@@ -23,7 +23,9 @@ public class MartialArt {
     }
 
     // this getter method to get the items in our room db
-    public String getMartialArt() {
+
+    @NonNull
+    public String getmFavMartialArt() {
         return mFavMartialArt;
     }
 }

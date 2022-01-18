@@ -24,7 +24,7 @@ public interface MartialArtDAO {
     void deleteMartialArt(MartialArt martialArt);
 
     // this method get and order by Alphabetical
-    @Query("Select * FROM martial_art_table ORDER BY fav_martial_art ASC")
+    @Query("Select * FROM martial_art_table ORDER BY fav_martial_art ASC ")
     LiveData<List<MartialArt>> getAllMartialArtsInAnAlphabeticalOrder();
 
 

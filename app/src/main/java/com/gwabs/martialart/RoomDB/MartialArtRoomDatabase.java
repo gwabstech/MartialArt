@@ -2,9 +2,11 @@ package com.gwabs.martialart.RoomDB;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,11 +29,40 @@ public abstract class MartialArtRoomDatabase extends RoomDatabase {
 
             synchronized (MartialArtRoomDatabase.class) {
 
-                INSTANCE = Room.databaseBuilder(context, MartialArtRoomDatabase.class, "martial_art_database").build();
+                INSTANCE = Room.databaseBuilder(context, MartialArtRoomDatabase.class, "martial_art_database").addCallback(databaseCallback).build();
 
             }
         }
         return INSTANCE;
     }
+
+    private static RoomDatabase.Callback databaseCallback = new RoomDatabase.Callback(){
+
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+            databaseWriterExecutor.execute(() -> {
+
+                // Delete all data in db
+                MartialArtDAO dao =INSTANCE.martialArtDAO();
+
+                dao.deleteAllMartialArts();;
+
+                // adding data
+                MartialArt martialArt = new MartialArt("Kick Boxing");
+                dao.insertMartialArt(martialArt);
+
+                martialArt = new MartialArt("Damben Hausa");
+                dao.insertMartialArt(martialArt);
+
+            });{
+
+            };
+
+        }
+
+
+    };
 }
 

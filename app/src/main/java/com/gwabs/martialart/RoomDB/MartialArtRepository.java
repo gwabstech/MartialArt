@@ -17,7 +17,6 @@ public class MartialArtRepository {
         MartialArtRoomDatabase martialArtRoomDatabase = MartialArtRoomDatabase.getDatabase(application);
 
         martialArtDAO = martialArtRoomDatabase.martialArtDAO();
-
         allMartialArts = martialArtDAO.getAllMartialArtsInAnAlphabeticalOrder(); // Room executes all queries on a separate thread so the UI thread is not blocked.
 
     }

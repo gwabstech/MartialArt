@@ -20,6 +20,7 @@ public class MartialArtViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+    // this update the textView
     public void bind(String text) {
 
         txtMartialArt.setText(text);
