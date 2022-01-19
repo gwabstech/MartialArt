@@ -1,5 +1,6 @@
 package com.gwabs.martialart.View;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,8 +11,10 @@ import com.gwabs.martialart.RoomDB.MartialArt;
 
 public class MartialArtListAdapter extends ListAdapter<MartialArt,MartialArtViewHolder> {
 
-    protected MartialArtListAdapter(@NonNull DiffUtil.ItemCallback<MartialArt> diffCallback) {
+    private ListItemLongClickListener mListItemLongClickListener;
+    protected MartialArtListAdapter(ListItemLongClickListener listItemLongClickListener,@NonNull DiffUtil.ItemCallback<MartialArt> diffCallback) {
         super(diffCallback);
+       this.mListItemLongClickListener = listItemLongClickListener;
     }
 
     @NonNull
@@ -24,6 +27,10 @@ public class MartialArtListAdapter extends ListAdapter<MartialArt,MartialArtView
     public void onBindViewHolder(@NonNull MartialArtViewHolder holder, int position) {
         MartialArt currentMrtialArtObjrct = getItem(position);
         holder.bind(currentMrtialArtObjrct.mFavMartialArt);
+        holder.itemView.setOnLongClickListener(v -> {
+            mListItemLongClickListener.listItemLongClicked(currentMrtialArtObjrct);
+            return true;
+        });
     }
 
     public static class MartialArtDiff extends DiffUtil.ItemCallback<MartialArt>{

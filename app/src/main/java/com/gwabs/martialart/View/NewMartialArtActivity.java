@@ -27,15 +27,16 @@ public class NewMartialArtActivity extends AppCompatActivity {
             Intent getBackIntent = new Intent();
             if (TextUtils.isEmpty(edtMartialArt.getText().toString())) {
                 edtMartialArt.setError("no empty");
-                setResult(RESULT_CANCELED, getBackIntent);
+                //setResult(RESULT_CANCELED, getBackIntent);
             } else {
 
                 // sending data to an activity
                 String favMa = edtMartialArt.getText().toString();
                 getBackIntent.putExtra(KEY, favMa);
                 setResult(RESULT_OK, getBackIntent);
+                finish();
             }
-            finish();
+
         });
     }
 }
