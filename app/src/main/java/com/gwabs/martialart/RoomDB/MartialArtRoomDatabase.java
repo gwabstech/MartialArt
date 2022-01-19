@@ -36,33 +36,30 @@ public abstract class MartialArtRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback databaseCallback = new RoomDatabase.Callback(){
+    private static final Callback databaseCallback = new Callback() {
 
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
             databaseWriterExecutor.execute(() -> {
+                MartialArtDAO dao = INSTANCE.martialArtDAO();
 
-                // Delete all data in db
-                MartialArtDAO dao =INSTANCE.martialArtDAO();
 
-                dao.deleteAllMartialArts();;
+                // deleting all martial art db
+                dao.deleteAllMartialArts();
 
-                // adding data
-                MartialArt martialArt = new MartialArt("Kick Boxing");
-                dao.insertMartialArt(martialArt);
+                // adding martial art to db
 
-                martialArt = new MartialArt("Damben Hausa");
-                dao.insertMartialArt(martialArt);
+                dao.insertMartialArt(new MartialArt("Boxing"));
+                dao.insertMartialArt(new MartialArt("Dambe"));
+                dao.insertMartialArt(new MartialArt("Kick Boxing"));
+                dao.insertMartialArt(new MartialArt("Kokuwa  Dambe"));
 
-            });{
-
-            };
-
+            });
         }
-
-
     };
+
+
 }
 
